@@ -1,3 +1,53 @@
 body {
-  background-color: bisque;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: yellow;
+  padding-left: 20px;
+}
+
+ul {
+  display: flex;
+}
+
+ul li {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+ul li a:hover {
+  color: rgb(55, 55, 105);
+  text-decoration: underline;
+}
+
+main {
+  height: 80vh;
+}
+
+footer {
+  background-color: rgb(55, 55, 105);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+footer p {
+  color: white;
+  padding: 20px;
 }
