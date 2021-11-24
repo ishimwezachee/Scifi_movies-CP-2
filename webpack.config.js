@@ -15,7 +15,6 @@ module.exports = {
       filename: 'index.html',
       title: 'Output Management',
       template: './src/index.html',
-
     }),
 
   ],
