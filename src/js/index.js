@@ -1,13 +1,16 @@
 import '../style.css';
 
 const card = document.querySelector('.cards');
+const body = document.querySelector('body');
+const modal = document.getElementById('myModal');
+const modalContent = document.querySelector('.content');
 
-const baseUrl = 'https://api.tvmaze.com/search/shows?q=girls';
+const baseUrl = 'https://api.tvmaze.com/search/shows?q=a';
 
 const reachData = async () => {
   const getData = await fetch(baseUrl);
-  const content = await getData.json();
-  return content;
+  const dataContent = await getData.json();
+  return dataContent;
 };
 
 reachData().then((data) => data.forEach(
@@ -19,8 +22,45 @@ reachData().then((data) => data.forEach(
                <P class="name">${e.show.name}</P>
                <i class="far fa-heart"></i>
            </div>
-           <button>Comments</button>
+           <button class="comments" id="${e.show.id}">Comments</button>
            </div>
             `;
   },
 ));
+
+const getDataFromApi = (id) => {
+  reachData().then((data) => {
+    data.forEach((el) => {
+      if (el.show.id === id) {
+        modalContent.innerHTML = `
+           <div class="card">
+           <img src="${el.show.image.medium}" alt="">
+           <span>Summary:</span>
+           <p>${el.show.summary}</p>
+           <span>language:</span>
+           <p>${el.show.language}</p>
+
+           <div class="name-icon">
+               <p class="name">${el.show.name}</p>
+               <i class="far fa-heart"></i>
+           </div>
+           <button class="comments" id="${el.show.id}">Comments</button>
+           </div>
+            `;
+      }
+    });
+  });
+};
+
+body.addEventListener('click', (e) => {
+  if (e.target.className === 'comments') {
+    modal.style.display = 'block';
+    getDataFromApi(e.target.id);
+  }
+  if (e.target.className === 'close') {
+    modal.style.display = 'none';
+  }
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
