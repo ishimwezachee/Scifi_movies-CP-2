@@ -1,6 +1,7 @@
 import '../style.css';
 
 const card = document.querySelector('.cards');
+const body = document.querySelector('body')
 
 const baseUrl = 'https://api.tvmaze.com/search/shows?q=girls';
 
@@ -9,6 +10,7 @@ const reachData = async () => {
     const content = await getData.json();
     return content;
 };
+
 reachData().then((data) => data.forEach(
     (e) => {
         card.innerHTML += `
@@ -25,8 +27,13 @@ reachData().then((data) => data.forEach(
 ));
 
 
-const commentBtn = document.getElementsByTagName('button');
-console.log(commentBtn);
+body.addEventListener('click',(e)=>{
+    if(e.target.className =="comments"){
+        console.log("object");
+    }
+})
+  
+
 
 
 
