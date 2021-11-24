@@ -1,5 +1,5 @@
 import '../style.css';
-const card = document.querySelector('.card')
+const card = document.querySelector('.cards')
 
 const baseUrl = "https://api.tvmaze.com/search/shows?q=girls";
 
@@ -13,12 +13,14 @@ reachData().then(data =>
     data.map(
         (e) => {
             card.innerHTML += `
-            <img src="${e.show.image.medium}" alt="">
-            <div class="name-icon">
-                <P class="name">${e.show.name}</P>
-                <i class="far fa-heart"></i>
-            </div>
-            <button>Comments</button>
+           <div class="card">
+           <img src="${e.show.image.medium}" alt="">
+           <div class="name-icon">
+               <P class="name">${e.show.name}</P>
+               <i class="far fa-heart"></i>
+           </div>
+           <button>Comments</button>
+           </div>
             `
         }
     )

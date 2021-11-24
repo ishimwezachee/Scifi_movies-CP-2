@@ -51,3 +51,14 @@ footer p {
   color: white;
   padding: 20px;
 }
+
+.cards {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: red;
+  border: 2px solid white;
+}
