@@ -19,8 +19,12 @@ reachData().then((data) => data.forEach(
                <P class="name">${e.show.name}</P>
                <i class="far fa-heart"></i>
            </div>
-           <button>Comments</button>
+           <button id="${e.show.id}" onclick="getId(this.id)">Comments</button>
            </div>
             `;
   },
 ));
+
+function getId(id){
+    console.log(id);
+}
