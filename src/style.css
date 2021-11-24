@@ -76,3 +76,17 @@ footer p {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 44px;
+  font-weight: bold;
+  margin-right: 15px;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+

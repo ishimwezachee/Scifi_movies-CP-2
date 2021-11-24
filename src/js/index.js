@@ -31,7 +31,7 @@ reachData().then((data) => data.forEach(
 const getDataFromApi = (id) => {
   reachData().then((data) => {
     data.forEach((el) => {
-      if (el.show.id === id) {
+      if (el.show.id.toString() === id.toString()) {
         modalContent.innerHTML = `
            <div class="card">
            <img src="${el.show.image.medium}" alt="">
