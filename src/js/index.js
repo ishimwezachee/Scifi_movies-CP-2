@@ -6,6 +6,7 @@ const modal = document.getElementById('myModal');
 const modalContent = document.querySelector('.content');
 
 const baseUrl = 'https://api.tvmaze.com/search/shows?q=a';
+const baseApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/E99YWL4bSNcpj6cnEjTo/comments';
 
 const reachData = async () => {
   const getData = await fetch(baseUrl);
@@ -28,7 +29,43 @@ reachData().then((data) => data.forEach(
   },
 ));
 
+const getComment = async (id) => {
+  const getData = await fetch(`${baseApiUrl}?item_id=${id}`);
+  const dataContent = await getData.json();
+  return dataContent;
+};
+
+const getCommentItems = (id) => {
+  getComment(id).then((data) => {
+    const commentList = document.querySelector('.comment-list');
+    data.forEach((e) => {
+      commentList.innerHTML += `
+                <ul>
+                <li>${e.username}</li>
+                <li>${e.comment}</li>
+                </ul>
+                `;
+    });
+  });
+};
+
+const postItem = async (value) => {
+  (await fetch(baseApiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      item_id: value.id,
+      username: value.name,
+      comment: value.text,
+    }),
+  }));
+  getCommentItems(value.id);
+};
+
 const getDataFromApi = (id) => {
+  getCommentItems(id);
   reachData().then((data) => {
     data.forEach((el) => {
       if (el.show.id.toString() === id.toString()) {
@@ -43,8 +80,18 @@ const getDataFromApi = (id) => {
            <div class="name-icon">
                <p class="name">${el.show.name}</p>
                <i class="far fa-heart"></i>
+               <div>
+               <input type="hidden" name="id" id="id" value="${el.show.id}">
+               <div class="comment-list">
+              </div>
+               <div>
+               <input type="text" name="name" id="name" placeholder="Name">
+               <input type="text" name="commentText" id="commentText" placeholder="Comments">
+               <button class="add-comments">Add Comments</button>
+               </div>
+          
            </div>
-           <button class="comments" id="${el.show.id}">Comments</button>
+           </div>
            </div>
             `;
       }
@@ -62,5 +109,9 @@ body.addEventListener('click', (e) => {
   }
   if (e.target === modal) {
     modal.style.display = 'none';
+  }
+  if (e.target.className === 'add-comments') {
+    const value = { name: document.querySelector('#name').value, text: document.querySelector('#commentText').value, id: document.querySelector('#id').value };
+    postItem(value);
   }
 });
