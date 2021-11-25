@@ -2,7 +2,7 @@
 
 # Module 1: Capstone Project
 
-> i made up To-Do list with javascript 
+> We made up Capstone Project with javascript 
 
 ![screenshot](./app_screenshot.png)
 
@@ -26,8 +26,8 @@
 
 **To get a copy of this repo into your local machine run the following command:**
 ```
-git clone  ---
-cd --
+git clone  https://github.com/ishimwezachee/Capstone-project-2
+cd Capstone-project-2
 in visual studio code you can click the go live button to view it live in the browser.
 ```
 
