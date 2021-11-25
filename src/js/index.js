@@ -1,10 +1,10 @@
 import '../style.css';
+import counter from './counter.js';
 
 const card = document.querySelector('.cards');
 const body = document.querySelector('body');
 const modal = document.getElementById('myModal');
 const modalContent = document.querySelector('.content');
-
 const baseUrl = 'https://api.tvmaze.com/search/shows?q=a';
 const baseApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/comments';
 
@@ -41,15 +41,19 @@ const getComment = async (id) => {
 const getCommentItems = (id) => {
   getComment(id).then((data) => {
     const commentList = document.querySelector('.comment-list');
-    commentList.innerHTML = '';
-    data.forEach((e) => {
-      commentList.innerHTML += `
-                <ul>
-                <li>${e.username}</li>
-                <li>${e.comment}</li>
-                </ul>
-                `;
-    });
+    if (counter(data) === undefined) {
+      commentList.innerHTML = 'No Comments';
+    } else {
+      commentList.innerHTML = `<h4>Comments(${counter(data)})</h4>`;
+      data.forEach((e) => {
+        commentList.innerHTML += `
+                  <ul>
+                  <li>${e.username}</li>
+                  <li>${e.comment}</li>
+                  </ul>
+                  `;
+      });
+    }
   });
 };
 
@@ -87,6 +91,7 @@ const getDataFromApi = (id) => {
                <div>
                <input type="hidden" name="id" id="id" value="${el.show.id}">
                <div class="comment-list">
+               <p>loading</p>
               </div>
                <div>
                <input type="text" name="name" id="name" placeholder="Name">
