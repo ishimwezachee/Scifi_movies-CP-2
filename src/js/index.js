@@ -5,7 +5,6 @@ const body = document.querySelector('body');
 const modal = document.getElementById('myModal');
 const modalContent = document.querySelector('.content');
 
-
 const baseUrl = 'https://api.tvmaze.com/search/shows?q=a';
 
 const reachData = async () => {
@@ -30,18 +29,8 @@ reachData().then((data) => data.forEach(
            </div>
             `;
   },
-)).then(()=>{
-  const likes = document.querySelectorAll('.likes');
-  likes.forEach((like,index)=>{
-    like.addEventListener('click',(e)=>{
-      e.preventDefault();
-      
-    })
-  });
-}).then((data)=>{
+));
 
-})
- 
 const getDataFromApi = (id) => {
   reachData().then((data) => {
     data.forEach((el) => {
@@ -66,63 +55,59 @@ const getDataFromApi = (id) => {
   });
 };
 
+const CreateLikes = async (id) => {
+  const data = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ item_id: id }),
+  });
+  return data;
+};
+
+// get likes
+const getData = async (collaback) => {
+  const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes';
+  const data = await fetch(url);
+  const content = await data.json();
+  collaback(content);
+};
+
 const addLikes = (id) => {
   reachData().then((data) => {
     data.forEach((el) => {
       if (el.show.id.toString() === id.toString()) {
-        // post a likes 
-        CreateLikes(id)
-        // call a likes 
-         getData((data)=>{
-         data.forEach((val)=>{
+        // post a likes
+        CreateLikes(id);
+        // call a likes
+        getData((data) => {
+          data.forEach((val) => {
           //  let elem = elemNumber[index]
-           if(val.item_id.toString() === id.toString()){
-             let elem = document.getElementById(id.toString());
-            elem.parentElement.lastElementChild.firstElementChild.textContent = val.likes;
-           }
-         })
+            if (val.item_id.toString() === id.toString()) {
+              const elem = document.getElementById(id.toString());
+              elem.parentElement.lastElementChild.firstElementChild.textContent = val.likes;
+            }
+          });
         });
-    
       }
     });
   });
 };
 
-
-const CreateLikes = async (id) => {
-  const data = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({"item_id":id}),
-  });
-  return data;
-};
-
-
-// get likes 
-const getData = async (collaback) => {
-  const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes';
-  const data = await fetch(url);
-  const content = await data.json();
-   collaback(content)
-};
-
-window.addEventListener('load',()=>{
-  getData((data)=>{
-    data.forEach(element => {
+window.addEventListener('load', () => {
+  getData((data) => {
+    data.forEach((element) => {
       const likesCount = document.querySelectorAll('.number');
-      likesCount.forEach((e)=>{
-        if (e.id == element.item_id) {
-          e.textContent = element.likes
+      likesCount.forEach((e) => {
+        if (e.id.toString() === element.item_id.toString()) {
+          e.textContent = element.likes;
         }
-      })     
+      });
     });
-  })
- 
-})
+  });
+});
 
 body.addEventListener('click', (e) => {
   if (e.target.className === 'comments') {
@@ -135,9 +120,7 @@ body.addEventListener('click', (e) => {
   if (e.target === modal) {
     modal.style.display = 'none';
   }
-  if (e.target.className === "far fa-heart likes") {
-    addLikes(e.target.id)    
+  if (e.target.className === 'far fa-heart likes') {
+    addLikes(e.target.id);
   }
 });
-
-
