@@ -25,7 +25,7 @@ reachData().then((data) => data.forEach(
            <img src="${e.show.image.medium}" alt="image">
            <div class="name-icon">
                <P class="name">${e.show.name}</P>
-               <div>
+               <div class="onlike">
                <i id="${e.show.id}" class="far fa-heart likes"></i>
                <p><span id="${e.show.id}" class="number">0</span> likes</p>
                </div>
