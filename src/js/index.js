@@ -41,15 +41,19 @@ const getComment = async (id) => {
 const getCommentItems = (id) => {
   getComment(id).then((data) => {
     const commentList = document.querySelector('.comment-list');
-    commentList.innerHTML = '';
-    data.forEach((e) => {
-      commentList.innerHTML += `
-                <ul>
-                <li>${e.username}</li>
-                <li>${e.comment}</li>
-                </ul>
-                `;
-    });
+    if (data.length === undefined) {
+      commentList.innerHTML = 'No Comments';
+    } else {
+      commentList.innerHTML = `<h4>Comments(${data.length})</h4>`;
+      data.forEach((e) => {
+        commentList.innerHTML += `
+                  <ul>
+                  <li>${e.username}</li>
+                  <li>${e.comment}</li>
+                  </ul>
+                  `;
+      });
+    }
   });
 };
 
@@ -87,6 +91,7 @@ const getDataFromApi = (id) => {
                <div>
                <input type="hidden" name="id" id="id" value="${el.show.id}">
                <div class="comment-list">
+               <p>loading</p>
               </div>
                <div>
                <input type="text" name="name" id="name" placeholder="Name">
