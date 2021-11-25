@@ -35,9 +35,11 @@ reachData().then((data) => data.forEach(
   likes.forEach((like,index)=>{
     like.addEventListener('click',(e)=>{
       e.preventDefault();
-      addLikes(e.target.id)
+      
     })
   });
+}).then((data)=>{
+
 })
  
 const getDataFromApi = (id) => {
@@ -108,6 +110,20 @@ const getData = async (collaback) => {
    collaback(content)
 };
 
+window.addEventListener('load',()=>{
+  getData((data)=>{
+    data.forEach(element => {
+      const likesCount = document.querySelectorAll('.number');
+      likesCount.forEach((e)=>{
+        if (e.id == element.item_id) {
+          e.textContent = element.likes
+        }
+      })     
+    });
+  })
+ 
+})
+
 body.addEventListener('click', (e) => {
   if (e.target.className === 'comments') {
     modal.style.display = 'block';
@@ -118,6 +134,9 @@ body.addEventListener('click', (e) => {
   }
   if (e.target === modal) {
     modal.style.display = 'none';
+  }
+  if (e.target.className === "far fa-heart likes") {
+    addLikes(e.target.id)    
   }
 });
 
