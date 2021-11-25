@@ -38,6 +38,7 @@ const getComment = async (id) => {
 const getCommentItems = (id) => {
   getComment(id).then((data) => {
     const commentList = document.querySelector('.comment-list');
+    commentList.innerHTML = "";
     data.forEach((e) => {
       commentList.innerHTML += `
                 <ul>
