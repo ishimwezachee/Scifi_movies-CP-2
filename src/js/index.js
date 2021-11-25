@@ -29,7 +29,7 @@ reachData().then((data) => data.forEach(
            </div>
             `;
   },
-));
+))
 
 const getDataFromApi = (id) => {
   reachData().then((data) => {
@@ -55,6 +55,7 @@ const getDataFromApi = (id) => {
   });
 };
 
+
 const CreateLikes = async (id) => {
   const data = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes', {
     method: 'POST',
@@ -73,28 +74,30 @@ const getData = async (collaback) => {
   const data = await fetch(url);
   const content = await data.json();
   collaback(content);
-};
+}; 
 
 const addLikes = (id) => {
   reachData().then((data) => {
     data.forEach((el) => {
       if (el.show.id.toString() === id.toString()) {
-        // post a likes
-        CreateLikes(id);
-        // call a likes
-        getData((data) => {
-          data.forEach((val) => {
-          //  let elem = elemNumber[index]
-            if (val.item_id.toString() === id.toString()) {
-              const elem = document.getElementById(id.toString());
-              elem.parentElement.lastElementChild.firstElementChild.textContent = val.likes;
-            }
+        CreateLikes(id).then((data)=>{
+         if(data.status === 201){
+          getData((data) => {
+            data.forEach((val) => {
+              if (val.item_id.toString() === id.toString()) {
+                const elem = document.getElementById(id.toString());
+                elem.parentElement.lastElementChild.firstElementChild.textContent = val.likes;
+              }
+            });
           });
+         }
         });
       }
     });
   });
 };
+
+
 
 window.addEventListener('load', () => {
   getData((data) => {
