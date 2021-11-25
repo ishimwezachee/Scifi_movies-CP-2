@@ -1,10 +1,10 @@
 import '../style.css';
+import counter from './counter.js';
 
 const card = document.querySelector('.cards');
 const body = document.querySelector('body');
 const modal = document.getElementById('myModal');
 const modalContent = document.querySelector('.content');
-
 const baseUrl = 'https://api.tvmaze.com/search/shows?q=a';
 const baseApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/comments';
 
@@ -41,10 +41,10 @@ const getComment = async (id) => {
 const getCommentItems = (id) => {
   getComment(id).then((data) => {
     const commentList = document.querySelector('.comment-list');
-    if (data.length === undefined) {
+    if (counter(data) === undefined) {
       commentList.innerHTML = 'No Comments';
     } else {
-      commentList.innerHTML = `<h4>Comments(${data.length})</h4>`;
+      commentList.innerHTML = `<h4>Comments(${counter(data)})</h4>`;
       data.forEach((e) => {
         commentList.innerHTML += `
                   <ul>
