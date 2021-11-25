@@ -35,7 +35,7 @@ reachData().then((data) => data.forEach(
   likes.forEach((like,index)=>{
     like.addEventListener('click',(e)=>{
       e.preventDefault();
-      addLikes(e.target)
+      addLikes(e.target.id)
     })
   });
 })
@@ -64,7 +64,7 @@ const getDataFromApi = (id) => {
   });
 };
 
-const addLikes = (i) => {
+const addLikes = (id) => {
   reachData().then((data) => {
     data.forEach((el) => {
       if (el.show.id.toString() === id.toString()) {
@@ -72,14 +72,11 @@ const addLikes = (i) => {
         CreateLikes(id)
         // call a likes 
          getData((data)=>{
-          // const elemNumber = document.querySelectorAll('.number');
-         data.forEach((val,index)=>{
+         data.forEach((val)=>{
           //  let elem = elemNumber[index]
            if(val.item_id.toString() === id.toString()){
              let elem = document.getElementById(id.toString());
-             console.log(elem)
-             console.log(val.likes)
-           console.log(elem)
+            elem.parentElement.lastElementChild.firstElementChild.textContent = val.likes;
            }
          })
         });
