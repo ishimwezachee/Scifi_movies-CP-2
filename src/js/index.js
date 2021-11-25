@@ -9,15 +9,14 @@ const spaceShip = document.querySelector('.space');
 const baseUrl = 'https://api.tvmaze.com/search/shows?q=a';
 const baseApiUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/comments';
 
-
 const reachData = async () => {
   const getData = await fetch(baseUrl);
   const dataContent = await getData.json();
   return dataContent;
 };
-reachData().then((data)=>{
-  spaceShip.innerText = "("+counter(data)+")";
-})
+reachData().then((data) => {
+  spaceShip.innerText = `(${counter(data)})`;
+});
 
 reachData().then((data) => data.forEach(
   (e) => {
