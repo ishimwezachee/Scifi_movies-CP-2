@@ -5,6 +5,7 @@ const body = document.querySelector('body');
 const modal = document.getElementById('myModal');
 const modalContent = document.querySelector('.content');
 
+
 const baseUrl = 'https://api.tvmaze.com/search/shows?q=a';
 
 const reachData = async () => {
@@ -17,17 +18,28 @@ reachData().then((data) => data.forEach(
   (e) => {
     card.innerHTML += `
            <div class="card">
-           <img src="${e.show.image.medium}" alt="">
+           <img src="${e.show.image.medium}" alt="image">
            <div class="name-icon">
                <P class="name">${e.show.name}</P>
-               <i class="far fa-heart"></i>
+               <div>
+               <i id="${e.show.id}" class="far fa-heart likes"></i>
+               <p><span id="${e.show.id}" class="number">0</span> likes</p>
+               </div>
            </div>
            <button class="comments" id="${e.show.id}">Comments</button>
            </div>
             `;
   },
-));
-
+)).then(()=>{
+  const likes = document.querySelectorAll('.likes');
+  likes.forEach((like,index)=>{
+    like.addEventListener('click',(e)=>{
+      e.preventDefault();
+      addLikes(e.target)
+    })
+  });
+})
+ 
 const getDataFromApi = (id) => {
   reachData().then((data) => {
     data.forEach((el) => {
@@ -52,6 +64,53 @@ const getDataFromApi = (id) => {
   });
 };
 
+const addLikes = (i) => {
+  reachData().then((data) => {
+    data.forEach((el) => {
+      if (el.show.id.toString() === id.toString()) {
+        // post a likes 
+        CreateLikes(id)
+        // call a likes 
+         getData((data)=>{
+          // const elemNumber = document.querySelectorAll('.number');
+         data.forEach((val,index)=>{
+          //  let elem = elemNumber[index]
+           if(val.item_id.toString() === id.toString()){
+             let elem = document.getElementById(id.toString());
+             console.log(elem)
+             console.log(val.likes)
+           console.log(elem)
+           }
+         })
+        });
+    
+      }
+    });
+  });
+};
+
+
+const CreateLikes = async (id) => {
+  const data = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({"item_id":id}),
+  });
+  return data;
+};
+
+
+// get likes 
+const getData = async (collaback) => {
+  const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes';
+  const data = await fetch(url);
+  const content = await data.json();
+   collaback(content)
+};
+
 body.addEventListener('click', (e) => {
   if (e.target.className === 'comments') {
     modal.style.display = 'block';
@@ -64,3 +123,5 @@ body.addEventListener('click', (e) => {
     modal.style.display = 'none';
   }
 });
+
+
