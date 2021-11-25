@@ -127,17 +127,17 @@ const addLikes = (id) => {
   reachData().then((data) => {
     data.forEach((el) => {
       if (el.show.id.toString() === id.toString()) {
-        // post a likes
-        CreateLikes(id);
-        // call a likes
-        getData((data) => {
-          data.forEach((val) => {
-          //  let elem = elemNumber[index]
-            if (val.item_id.toString() === id.toString()) {
-              const elem = document.getElementById(id.toString());
-              elem.parentElement.lastElementChild.firstElementChild.textContent = val.likes;
-            }
-          });
+        CreateLikes(id).then((data) => {
+          if (data.status === 201) {
+            getData((data) => {
+              data.forEach((val) => {
+                if (val.item_id.toString() === id.toString()) {
+                  const elem = document.getElementById(id.toString());
+                  elem.parentElement.lastElementChild.firstElementChild.textContent = val.likes;
+                }
+              });
+            });
+          }
         });
       }
     });
