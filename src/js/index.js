@@ -17,10 +17,13 @@ reachData().then((data) => data.forEach(
   (e) => {
     card.innerHTML += `
            <div class="card">
-           <img src="${e.show.image.medium}" alt="">
+           <img src="${e.show.image.medium}" alt="image">
            <div class="name-icon">
                <P class="name">${e.show.name}</P>
-               <i class="far fa-heart"></i>
+               <div>
+               <i id="${e.show.id}" class="far fa-heart likes"></i>
+               <p><span id="${e.show.id}" class="number">0</span> likes</p>
+               </div>
            </div>
            <button class="comments" id="${e.show.id}">Comments</button>
            </div>
@@ -52,6 +55,60 @@ const getDataFromApi = (id) => {
   });
 };
 
+const CreateLikes = async (id) => {
+  const data = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ item_id: id }),
+  });
+  return data;
+};
+
+// get likes
+const getData = async (collaback) => {
+  const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6AClVl2oXlI9tDJKRbp5/likes';
+  const data = await fetch(url);
+  const content = await data.json();
+  collaback(content);
+};
+
+const addLikes = (id) => {
+  reachData().then((data) => {
+    data.forEach((el) => {
+      if (el.show.id.toString() === id.toString()) {
+        // post a likes
+        CreateLikes(id);
+        // call a likes
+        getData((data) => {
+          data.forEach((val) => {
+          //  let elem = elemNumber[index]
+            if (val.item_id.toString() === id.toString()) {
+              const elem = document.getElementById(id.toString());
+              elem.parentElement.lastElementChild.firstElementChild.textContent = val.likes;
+            }
+          });
+        });
+      }
+    });
+  });
+};
+
+window.addEventListener('load', () => {
+  getData((data) => {
+    data.forEach((element) => {
+      const likesCount = document.querySelectorAll('.number');
+      likesCount.forEach((e) => {
+        if (e.id.toString() === element.item_id.toString()) {
+          e.textContent = element.likes;
+        }
+      });
+    });
+  });
+});
+
 body.addEventListener('click', (e) => {
   if (e.target.className === 'comments') {
     modal.style.display = 'block';
@@ -62,5 +119,8 @@ body.addEventListener('click', (e) => {
   }
   if (e.target === modal) {
     modal.style.display = 'none';
+  }
+  if (e.target.className === 'far fa-heart likes') {
+    addLikes(e.target.id);
   }
 });
