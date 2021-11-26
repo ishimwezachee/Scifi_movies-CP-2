@@ -75,11 +75,86 @@ footer p {
 
 .cards {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   color: white;
   text-align: center;
   padding-top: 30px;
+}
+.parent {
+  display: flex;
+  justify-content: center;
+}
+.commentText {
+  width: 400px;
+  height: 200px;
+}
+
+.commentArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+}
+
+#name {
+  padding: 15px;
+  color: white;
+  background-color: rgb(53, 14, 14);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.summary-image {
+  display: flex;
+  padding: 20px;
+}
+
+.text {
+  color: white;
+  width: 50%;
+}
+
+.medium {
+  height: 300px;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.comment-list ul {
+  font-family: "Courier New", Courier, monospace;
+  padding: 0;
+}
+
+.text p {
+  color: yellow;
+  font-size: 20px;
+  font-family: monospace;
+  text-align: center;
+}
+
+.add-comments {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #131129;
+  margin-bottom: 20px;
+}
+#commentText {
+  margin: 10px 0;
+  background-color: rgb(53, 14, 14);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 15px;
+  color: white;
 }
 
 .card {
@@ -111,12 +186,24 @@ footer p {
   border: none;
   outline: none;
   border-radius: 5px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 img {
   width: 300px;
   height: 250px;
   border-radius: 10px;
+}
+
+.imag-name {
+  text-align: center;
+}
+
+.imag-name p {
+  text-align: center;
+  color: #131129;
+  font-family: monospace;
+  font-size: 30px;
 }
 
 .modal {
@@ -130,13 +217,12 @@ img {
   height: 100%;
   overflow: auto;
   background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content {
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
   border: 1px solid #888;
   width: 80%;
 }

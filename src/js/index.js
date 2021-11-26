@@ -52,7 +52,7 @@ const getCommentItems = (id) => {
       data.forEach((e) => {
         commentList.innerHTML += `
                   <ul>
-                  <li>${e.username}</li>
+                  <li>${e.username} : </li>
                   <li>${e.comment}</li>
                   </ul>
                   `;
@@ -83,24 +83,26 @@ const getDataFromApi = (id) => {
       if (el.show.id.toString() === id.toString()) {
         modalContent.innerHTML = `
            <div class="card">
-           <img src="${el.show.image.medium}" alt="">
-           <span>Summary:</span>
-           <p>${el.show.summary}</p>
-           <span>language:</span>
-           <p>${el.show.language}</p>
-
-           <div class="name-icon">
-               <p class="name">${el.show.name}</p>
-               <i class="far fa-heart"></i>
-               <div>
+           <div class="summary-image">
+           <div class="imag-name">
+           <img class="medium" src="${el.show.image.medium}" alt="">
+           <p class="name">${el.show.name}</p>
+           </div>
+            <div class="text">
+            <p class="summary">${el.show.summary}</p>
+           <p class="language"><span>Language:</span>${el.show.language}</p>
+            </div>
+           </div>
                <input type="hidden" name="id" id="id" value="${el.show.id}">
                <div class="comment-list">
                <p>loading</p>
               </div>
-               <div>
+               <div class="parent">
+               <div class="commentArea">
                <input type="text" name="name" id="name" placeholder="Name">
-               <input type="text" name="commentText" id="commentText" placeholder="Comments">
+               <textarea type="text" name="commentText" id="commentText" placeholder="Comments"rows="4" cols="50"></textarea>
                <button class="add-comments">Add Comments</button>
+               </div>
                </div>
           
            </div>
@@ -170,6 +172,7 @@ body.addEventListener('click', (e) => {
   if (e.target.className === 'comments') {
     modal.style.display = 'block';
     getDataFromApi(e.target.id);
+ 
   }
   if (e.target.className === 'close') {
     modal.style.display = 'none';
@@ -183,5 +186,7 @@ body.addEventListener('click', (e) => {
   if (e.target.className === 'add-comments') {
     const value = { name: document.querySelector('#name').value, text: document.querySelector('#commentText').value, id: document.querySelector('#id').value };
     postItem(value);
+    value.name = ""
+    value.text = ""
   }
 });
