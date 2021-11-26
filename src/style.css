@@ -36,8 +36,14 @@ h1 {
   border: 1px solid white;
   border-radius: 30px;
   padding: 10px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family:
+    "Lucida Sans",
+    "Lucida Sans Regular",
+    "Lucida Grande",
+    "Lucida Sans Unicode",
+    Geneva,
+    Verdana,
+    sans-serif;
 }
 
 a {
@@ -81,10 +87,12 @@ footer p {
   text-align: center;
   padding-top: 30px;
 }
+
 .parent {
   display: flex;
   justify-content: center;
 }
+
 .commentText {
   width: 400px;
   height: 200px;
@@ -117,7 +125,7 @@ footer p {
 }
 
 .medium {
-  height: 300px;
+  height: 200px;
 }
 
 .comment-list {
@@ -147,11 +155,11 @@ footer p {
   background-color: #131129;
   margin-bottom: 20px;
 }
+
 #commentText {
   margin: 10px 0;
   background-color: rgb(53, 14, 14);
   border-radius: 5px;
-  border: none;
   outline: none;
   padding: 15px;
   color: white;
@@ -159,9 +167,8 @@ footer p {
 
 .card {
   background-color: #720202;
-  border: 2px solid white;
   margin: 10px 13px;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 10px;
 }
 

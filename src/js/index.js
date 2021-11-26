@@ -45,6 +45,9 @@ const getComment = async (id) => {
 const getCommentItems = (id) => {
   getComment(id).then((data) => {
     const commentList = document.querySelector('.comment-list');
+    const commentName = document.querySelector('#name');
+    const commentText = document.querySelector('#commentText');
+
     if (counter(data) === undefined) {
       commentList.innerHTML = 'No Comments';
     } else {
@@ -57,6 +60,8 @@ const getCommentItems = (id) => {
                   </ul>
                   `;
       });
+      commentName.value = '';
+      commentText.value = '';
     }
   });
 };
@@ -172,7 +177,6 @@ body.addEventListener('click', (e) => {
   if (e.target.className === 'comments') {
     modal.style.display = 'block';
     getDataFromApi(e.target.id);
- 
   }
   if (e.target.className === 'close') {
     modal.style.display = 'none';
@@ -186,7 +190,5 @@ body.addEventListener('click', (e) => {
   if (e.target.className === 'add-comments') {
     const value = { name: document.querySelector('#name').value, text: document.querySelector('#commentText').value, id: document.querySelector('#id').value };
     postItem(value);
-    value.name = ""
-    value.text = ""
   }
 });
