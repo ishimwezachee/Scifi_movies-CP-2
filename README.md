@@ -3,8 +3,10 @@
 # Module 1: Capstone Project
 
 > We made up Capstone Project with javascript 
+> Our project get data from API and we can send data with another API
 
-![screenshot](./app_screenshot.png)
+![screenshot](./Screenshot_1.png)
+![screenshot](./Screenshot_2.png)
 
 
 ## Built With
@@ -19,8 +21,9 @@
 
 [Live Demo Link]
 
+## Presentation
 
-
+[Video](https://www.loom.com/share/4ed79e2bb8054fac9ac88bc583c1f9d0)
 
 ## Getting Started
 
