@@ -1,0 +1,257 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url("./images/backround.jpg");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+li {
+  list-style: none;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: #131129;
+  padding-left: 20px;
+  color: white;
+}
+
+ul {
+  display: flex;
+}
+
+ul li {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 800;
+  border: 1px solid white;
+  border-radius: 30px;
+  padding: 10px;
+  font-family:
+    "Lucida Sans",
+    "Lucida Sans Regular",
+    "Lucida Grande",
+    "Lucida Sans Unicode",
+    Geneva,
+    Verdana,
+    sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+ul li a:hover {
+  color: rgb(55, 55, 105);
+  text-decoration: underline;
+}
+
+main {
+  padding-bottom: 150px;
+}
+
+footer {
+  background-color: #02101f;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+footer p {
+  color: white;
+  padding: 20px;
+  font-size: 25px;
+  text-align: center;
+  font-family: monospace;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: white;
+  text-align: center;
+  padding-top: 30px;
+  overflow-y: scroll;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+}
+
+.commentText {
+  width: 400px;
+  height: 200px;
+}
+
+.commentArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+}
+
+#name {
+  padding: 15px;
+  color: white;
+  background-color: rgb(53, 14, 14);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.summary-image {
+  display: flex;
+  padding: 20px;
+}
+
+.text {
+  color: white;
+  width: 50%;
+}
+
+.medium {
+  height: 200px;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.comment-list ul {
+  font-family: "Courier New", Courier, monospace;
+  padding: 0;
+  margin: 2px;
+}
+
+.text p {
+  color: yellow;
+  font-size: 15px;
+  font-family: monospace;
+  text-align: center;
+}
+
+.add-comments {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #131129;
+  margin-bottom: 20px;
+}
+
+#commentText {
+  margin: 10px 0;
+  background-color: rgb(53, 14, 14);
+  border-radius: 5px;
+  outline: none;
+  padding: 15px;
+  color: white;
+}
+
+.card {
+  background-color: #720202;
+  margin: 10px 13px;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.onlike {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-size: 18px;
+}
+
+.onlike i {
+  color: yellow;
+  font-size: 25px;
+}
+
+.comments {
+  color: white;
+  background-color: rgb(31, 1, 1);
+  margin: 10px;
+  padding: 7px 15px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+img {
+  width: 300px;
+  height: 250px;
+  border-radius: 10px;
+}
+
+.imag-name {
+  text-align: center;
+}
+
+.imag-name p {
+  text-align: center;
+  color: #131129;
+  font-family: monospace;
+  font-size: 30px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  margin: auto;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 44px;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 6px;
+}
