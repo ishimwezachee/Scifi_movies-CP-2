@@ -23,7 +23,7 @@
 
 ## Presentation
 
-[Video](https://www.loom.com/share/4ed79e2bb8054fac9ac88bc583c1f9d0)
+[Video](https://drive.google.com/file/d/1ScaC0EKHTyW2RiK6ZG2eKTRjsOzttpyH/view)
 
 ## Getting Started
 
